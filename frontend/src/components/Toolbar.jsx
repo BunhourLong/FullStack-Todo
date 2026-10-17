@@ -1,4 +1,4 @@
-import { STATUSES } from '../constants/status'
+import { STATUSES } from '../query/api'
 import StatusSelect from './StatusSelect'
 
 export default function Toolbar({

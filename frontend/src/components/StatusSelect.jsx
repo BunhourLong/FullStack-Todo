@@ -1,4 +1,4 @@
-import { STATUSES } from '../constants/status'
+import { STATUSES } from '../query/api'
 
 export default function StatusSelect({ value, onChange, placeholder, ...props }) {
   return (

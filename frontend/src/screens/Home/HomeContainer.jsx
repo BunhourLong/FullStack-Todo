@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import HomeScreen from './HomeScreen'
-import { STATUSES } from '../../constants/status'
 import {
+  STATUSES,
   useAddTodo,
   useBulkStatus,
   useDeleteTodos,

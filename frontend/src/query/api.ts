@@ -2,7 +2,9 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 
 const API = 'http://localhost:3000/api'
 
-export type Status = 'TODO' | 'IN PROGRESS' | 'DONE'
+// Must match the values the API accepts (CreateTodoDto).
+export const STATUSES = ['TODO', 'IN PROGRESS', 'DONE'] as const
+export type Status = (typeof STATUSES)[number]
 export type Todo = { id: number; title: string; status: Status; starred: boolean; position: number }
 export type TodoFilters = { status?: Status; q?: string }
 export type Profile = { username: string; displayName: string; email: string }
