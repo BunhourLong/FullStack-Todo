@@ -5,6 +5,7 @@ import { AppService } from './app.service.js';
 import { TodosModule } from './todos/todos.module.js';
 import { ProfileModule } from './profile/profile.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -19,17 +20,22 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     }),
     TodosModule,
     ProfileModule,
-    TypeOrmModule.forRoot({
-      type:'postgres',
-      host:'localhost',
-      port: 5432,
-      username:"postgres",
-      password:"postgres",
-      database:"todo",
-      autoLoadEntities: true,
-      synchronize: false,
-
-  }),
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get('DB_HOST'),
+        port: Number(configService.get('DB_PORT')),
+        username: configService.get('DB_USERNAME'),
+        password: configService.get('DB_PASSWORD'),
+        database: configService.get('DB_DATABASE'),
+        autoLoadEntities: true,
+        // schema is managed by src/migrations; synchronize would fight them
+        synchronize: false,
+      }),
+    }),
   ],
  
   controllers: [AppController],
