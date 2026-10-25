@@ -5,6 +5,7 @@ import {
   useAddTodo,
   useBulkStatus,
   useDeleteTodos,
+  useLogout,
   useProfile,
   useSaveOrder,
   useSetTodos,
@@ -31,6 +32,7 @@ export default function HomeContainer() {
   const removeTodos = useDeleteTodos()
   const saveOrder = useSaveOrder()
   const updateProfile = useUpdateProfile()
+  const logout = useLogout()
 
   const saveProfile = ({ username, email }) =>
     updateProfile.mutate({ id: profile.username, username, email })
@@ -69,6 +71,7 @@ export default function HomeContainer() {
     <HomeScreen
       profile={profile}
       onProfileSave={saveProfile}
+      onLogout={() => logout.mutate()}
       todos={todos}
       filtered={Boolean(filters.status || filters.q)}
       filter={filter}

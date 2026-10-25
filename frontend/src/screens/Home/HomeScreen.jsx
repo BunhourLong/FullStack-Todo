@@ -6,6 +6,7 @@ import TodoList from '../../components/TodoList'
 export default function HomeScreen({
   profile,
   onProfileSave,
+  onLogout,
   todos,
   filtered,
   filter,
@@ -28,6 +29,7 @@ export default function HomeScreen({
       <header className="home-header">
         <h1>Todos</h1>
         <span className="greeting">Hi, {profile.username}</span>
+        <button onClick={onLogout}>Log out</button>
       </header>
 
       <ProfileCard profile={profile} onSave={onProfileSave} />

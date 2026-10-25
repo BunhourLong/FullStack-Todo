@@ -6,6 +6,7 @@ import { TodosModule } from './todos/todos.module.js';
 import { ProfileModule } from './profile/profile.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -18,6 +19,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
       appSecret: 'YOUR_APP_SECRET',
       serviceId: 'todo-api',
     }),
+    AuthModule,
     TodosModule,
     ProfileModule,
     ConfigModule.forRoot({ isGlobal: true }),
